@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legend ProteK | احجز موعدك</title>
+  <link rel="icon" type="image/png" href="images/logo-icon-legend.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-dark: #b8942e;
+      --gold-light: #fde68a;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0d0f11;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(600px 420px at 85% -10%, rgba(212,175,55,0.07), transparent 60%),
+        radial-gradient(500px 420px at -10% 45%, rgba(212,175,55,0.04), transparent 60%),
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: auto, auto, 44px 44px, 44px 44px;
+      z-index: 0;
+    }
+    .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 92px 16px 16px; }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    ::selection { background: rgba(212,175,55,0.3); color: #fff; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.25); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.45); }
+
+    .gold-text {
+      background: linear-gradient(180deg, #fde68a 0%, #d4af37 55%, #b8942e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.35) 50%, transparent 100%);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo img { height: 44px; width: auto; filter: drop-shadow(0 0 10px rgba(212,175,55,0.25)); }
+
+    /* Booking Panel */
+    .booking-panel {
+      max-width: 640px;
+      margin: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      animation: cardIn 0.6s ease;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .booking-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent, rgb(212,175,55)) top / 100% 1px no-repeat,
+        linear-gradient(rgb(212,175,55), transparent) right / 1px 100% no-repeat;
+    }
+    /* Hero + form layout */
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .hero-side { min-width: 0; }
+    .form-side { position: sticky; top: 88px; min-width: 0;width:100% }
+    .hero-side h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero-img {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      aspect-ratio: 4 / 3;
+      background: #15181b;
+    }
+    .hero-img img,
+    .hero-img video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Steps indicator */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .step .num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .step.done { color: rgba(212,175,55,0.8); }
+    .step.done .num { border-color: rgba(212,175,55,0.6); color: var(--gold); }
+    .step.active { color: var(--gold); }
+    .step.active .num {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(212,175,55,0.4);
+    }
+    .step-sep { flex: 1; height: 1px; background: rgba(255,255,255,0.08); min-width: 12px; }
+    .panel-head { margin-bottom: 16px; }
+    .panel-head h2 { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
+    .panel-head p { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    /* Radio-style service chips */
+    .svc-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .svc-radio {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .svc-item.selected .svc-radio {
+      border-color: var(--gold);
+      background: radial-gradient(circle, var(--gold) 40%, transparent 45%);
+    }
+    .loading-state {
+      text-align: center;
+      padding: 48px 0;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+    .loading-state .spinner {
+      width: 28px;
+      height: 28px;
+      border: 2px solid rgba(212,175,55,0.2);
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 14px;
+    }
+    .form-error { text-align: center; padding: 40px 16px; }
+    .form-error p { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 18px; }
+    .form-error button {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 10px;
+      padding: 10px 22px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .form-error button:hover { background: rgba(212,175,55,0.15); }
+
+    /* Service picker */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .svc-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .svc-item:hover { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .svc-item.selected { border-color: var(--gold); background: rgba(212,175,55,0.1); }
+    .svc-name { font-size: 13px; font-weight: 600; color: #fff; }
+    .svc-meta { font-size: 11px; color: rgba(212,175,55,0.8); margin-top: 4px; }
+    .form-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+    }
+    .form-title svg { width: 20px; height: 20px; color: var(--gold); }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 8px;
+    }
+    .form-group label svg { width: 14px; height: 14px; color: var(--gold); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(212,175,55,0.6);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+    }
+    .form-group select option {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 10px;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+    .form-group input[type="date"] { color-scheme: dark; }
+    .form-group textarea { resize: none; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-nav { display: flex; gap: 10px; margin-top: 8px; }
+    .form-nav .submit-btn { flex: 1; margin-top: 0; width: auto; }
+    .nav-back {
+      flex-shrink: 0;
+      padding: 14px 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-back:hover { background: rgba(255,255,255,0.1); }
+    .step.done { cursor: pointer; }
+    .empty-note { font-size: 13px; color: rgba(255,255,255,0.45); padding: 12px 0 4px; }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(90deg, #d4af37 0%, #b8942e 100%);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s;
+      margin-top: 8px;
+      box-shadow: 0 8px 24px rgba(212,175,55,0.2);
+    }
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+    .submit-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .submit-btn .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success */
+    .success-view {
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 0 40px rgba(212,175,55,0.15);
+    }
+    .success-icon svg { width: 36px; height: 36px; color: var(--gold); }
+    .success-view h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .success-view > p { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 24px; }
+    .summary-box {
+      background: linear-gradient(135deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: start;
+    }
+    .summary-box .row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .summary-box .row:last-child { margin-bottom: 0; }
+    .summary-box .row svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+    .success-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .success-actions button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212,175,55,0.3) !important;
+      color: var(--gold);
+    }
+    .btn-secondary:hover { background: rgba(212,175,55,0.1); }
+    .btn-primary {
+      background: linear-gradient(90deg, #d4af37 0%, #b8942e 100%);
+      color: #000;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 16px;
+      position: relative;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    }
+    .footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    /* SMS opt-in */
+    .sms-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      user-select: none;
+    }
+    .sms-row input { accent-color: #d4af37; width: 15px; height: 15px; cursor: pointer; }
+
+    @media (max-width: 980px) {
+      .hero-wrap { display: flex; flex-direction: column; gap: 24px; }
+      .hero-side { display: contents; }
+      .form-side { position: static; order: 1; }
+      .hero-img { aspect-ratio: 16 / 9; order: 2; }
+    }
+    @media (max-width: 640px) {
+      .booking-panel { padding: 16px; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <img src="images/logo.png" alt="Legend ProteK">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-wrap">
+      <!-- Hero -->
+      <div class="hero-side">
+        <h1>احجز <span class="gold-text">موعدك</span></h1>
+        <div class="hero-img">
+          <video src="images/AQPMIAkXomJIsZBGodeBP9cICp_ujZA427WoBzRCCOW1YK4pEt23GTYhJmDzKB0IMOsl1QprDf-qAKNHViEQNuop0D7-N92j3nKpg_hrbA.mp4"
+                 poster="images/service-automotive.jpg"
+                 autoplay muted loop playsinline></video>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="form-side">
+        <div class="booking-panel">
+          <div id="formContent">
+            <div class="loading-state">
+              <div class="spinner"></div>
+              <p>جاري تحميل نموذج الحجز...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Legend ProteK &mdash; Where Protection Meets Perfection &mdash; Cairo, Egypt</p>
+    </div>
+  </div>
+
+  <script>
+    // API Configuration — public guest-booking endpoints (no auth needed)
+    const API_BASE_URL = 'https://erp.legendprotek.com/connector/api';
+    const BUSINESS_ID = 1;
+
+    let currentLanguage = 'ar'; // 'en' or 'ar'
+
+    // Booking state (first business location is used as the main branch)
+    let mainBranch = null;
+    let branchName = 'Legend ProteK';
+    let isCarService = true;
+    let services = []; // services offered by the main branch
+
+    // SVG Icons
+    const icons = {
+      wrench: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+      clipboard: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4"/></svg>',
+      shield: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+      brush: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 10.5V6"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 12V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2z"/></svg>',
+      wind: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>',
+      code: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+      gauge: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v4"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 5l2.8 2.8"/><path stroke-linecap="round" stroke-linejoin="round" d="m19 5-2.8 2.8"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l3-3"/><circle cx="12" cy="14" r="8"/></svg>',
+      scissors: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M20 4 8.12 15.88"/><path stroke-linecap="round" stroke-linejoin="round" d="M14.47 14.48 20 20"/><path stroke-linecap="round" stroke-linejoin="round" d="M8.12 8.12 12 12"/></svg>',
+    };
+
+    const arrowIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>';
+    const calendarIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 2v4M8 2v4M3 10h18"/></svg>';
+    const userIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+    const phoneIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+    const carIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>';
+    const messageIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    const checkIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 4 12 14.01l-3-3"/></svg>';
+    const wrenchIcon = icons.wrench;
+    const arrowLeftIcon = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m0 0l6 6m-6-6l6-6"/></svg>';
+
+    // Fetch Business Locations — location_id is optional server-side, so a
+    // failure here must not block quick booking (API uses first active branch)
+    async function initBookingPage() {
+      try {
+        console.log('🔄 Fetching business locations (public endpoint)...');
+
+        const response = await fetch(`${API_BASE_URL}/booking/locations?business_id=${BUSINESS_ID}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`API returned status ${response.status}`);
+        }
+
+        const data = await response.json();
+        const list = Array.isArray(data) ? data : (data.data && Array.isArray(data.data) ? data.data : null);
+
+        if (!list || list.length === 0) {
+          throw new Error('No branches returned from API');
+        }
+
+        // First active location = main branch (no branch selection needed)
+        mainBranch = list[0];
+        branchName = mainBranch.name || mainBranch.title || 'Legend ProteK';
+        isCarService = mainBranch.is_car_service !== undefined ? !!mainBranch.is_car_service
+          : (mainBranch.is_car_station !== undefined ? !!mainBranch.is_car_station : true);
+
+        console.log('✅ Main branch:', branchName, '| car service:', isCarService);
+
+        // Load the branch's services
+        await loadServices(mainBranch.id);
+      } catch (error) {
+        console.error('❌ Error loading booking page:', error);
+        // Fall through — quick booking still works without location/services
+      }
+      renderBookingForm();
+      // Warm up car brands, then refresh the vehicle section so the dropdown isn't empty
+      if (isCarService) fetchBrands().then(() => renderVehicleSection());
+    }
+
+    // Fetch services for the main branch (handles array + per-location map shapes)
+    async function loadServices(locationId) {
+      try {
+        const res = await apiCall(`/booking/services?business_id=${BUSINESS_ID}&location_id=${locationId}`);
+        const data = res && typeof res === 'object' && 'data' in res ? res.data : res;
+
+        let list = [];
+        if (Array.isArray(data)) {
+          list = data;
+        } else {
+          Object.values(data || {}).forEach(arr => {
+            if (Array.isArray(arr)) list.push(...arr);
+          });
+        }
+
+        const seen = new Set();
+        services = list.filter(s => (s && s.id != null && !seen.has(s.id)) ? seen.add(s.id) : false);
+        console.log('✅ Loaded', services.length, 'services for main branch');
+      } catch (error) {
+        console.error('❌ Error loading services:', error);
+        services = [];
+      }
+    }
+
+    function selectService(id, el) {
+      const s = services.find(x => x.id === id);
+      if (!s) return;
+      selectedService = { id: s.id, name: s.name_en || s.name, location_id: mainBranch ? mainBranch.id : null };
+      document.querySelectorAll('.svc-item').forEach(x => x.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      updateSubmitButton();
+    }
+
+    // Initialize
+    initBookingPage();
+
+    // API Helper — public guest-booking endpoints, no auth needed
+    async function apiCall(endpoint, method = 'GET', body = null) {
+      console.log(`🔵 API Call: ${method} ${API_BASE_URL}${endpoint}`);
+
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      };
+      if (body) options.body = JSON.stringify(body);
+
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+      console.log('📥 Response status:', response.status);
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        // Laravel validation errors: { message, errors: { field: [msgs] } }
+        const firstError = data.errors ? Object.values(data.errors).flat()[0] : null;
+        throw new Error(firstError || data.message || data.error || `API request failed with status ${response.status}`);
+      }
+
+      return data;
+    }
+
+    // Fetch Brands / Models (public endpoints; ids are sent with the booking)
+    let brands = [];
+    let models = [];
+
+    async function fetchBrands() {
+      try {
+        const response = await apiCall(`/booking/brands?business_id=${BUSINESS_ID}`);
+        const data = response && typeof response === 'object' && 'data' in response ? response.data : response;
+        brands = Array.isArray(data) ? data : [];
+        console.log('✅ Loaded', brands.length, 'brands');
+        return brands;
+      } catch (error) {
+        console.error('Error fetching brands:', error);
+        return [];
+      }
+    }
+
+    async function fetchModels(brandId) {
+      try {
+        const response = await apiCall(`/booking/models/${brandId}?business_id=${BUSINESS_ID}`);
+        const data = response && typeof response === 'object' && 'data' in response ? response.data : response;
+        models = Array.isArray(data) ? data : (data.models || []);
+        console.log('✅ Loaded', models.length, 'models');
+        return models;
+      } catch (error) {
+        console.error('Error fetching models:', error);
+        return [];
+      }
+    }
+
+    // Create Booking — one public POST handles contact + car + booking server-side.
+    // location_id, service_id and all car fields are optional.
+    async function createBooking() {
+      const payload = {
+        business_id: BUSINESS_ID,
+        name: formData.name,
+        mobile: formData.phone,
+        booking_date: formData.date,
+        booking_time: formData.time,
+        send_notification: formData.sendSms !== false
+      };
+
+      if (mainBranch && mainBranch.id) payload.location_id = mainBranch.id;
+      if (selectedService) payload.service_id = selectedService.id;
+      if (formData.notes) payload.notes = formData.notes;
+
+      if (isCarService) {
+        if (formData.brandId) payload.brand_id = formData.brandId;
+        if (formData.modelId) payload.model_id = formData.modelId;
+        if (formData.carType) payload.car_type = formData.carType;
+      }
+
+      console.log('📅 Creating booking with payload:', payload);
+      const response = await apiCall('/booking', 'POST', payload);
+      console.log('✅ Booking created successfully:', response);
+      return response;
+    }
+
+    // Form state
+    let selectedService = null;  // { id, name, location_id }
+    let currentStep = 0;         // 0 client+car | 1 service | 2 slot | 3 review
+
+    function carSummary() {
+      return [
+        (brands.find(b => b.id == formData.brandId) || {}).name,
+        (models.find(m => m.id == formData.modelId) || {}).name
+      ].filter(Boolean).join(' ');
+    }
+
+    const emptyFormData = () => ({
+      name: '',
+      phone: '',
+      carType: 'ملاكي',  // Default value
+      brandId: '',       // dropdown → brand_id
+      modelId: '',       // dropdown → model_id
+      date: '',
+      time: '',
+      notes: '',
+      sendSms: true
+    });
+    let formData = emptyFormData();
+
+    function resetForm() {
+      selectedService = null;
+      formData = emptyFormData();
+      currentStep = 0;
+      renderBookingForm();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderVehicleSection() {
+      // All car fields are optional for quick booking. Brand/model are
+      // dropdowns — the selected ids are sent as brand_id / model_id.
+      const vehicleSection = document.getElementById('vehicleSection');
+      if (!vehicleSection) return;
+
+      vehicleSection.innerHTML = `
+        <div class="form-title">${carIcon} بيانات العربية <span style="font-size:11px;color:rgba(255,255,255,0.35);font-weight:400">(اختياري)</span></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>الماركة</label>
+            <select id="fBrand" onchange="handleBrandChange(this.value)">
+              <option value="">اختار الماركة</option>
+              ${brands.map(b => `<option value="${b.id}" ${formData.brandId == b.id ? 'selected' : ''}>${b.name}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>الموديل</label>
+            <select id="fModel" onchange="updateField('modelId', this.value)" ${!formData.brandId ? 'disabled' : ''}>
+              <option value="">اختار الموديل</option>
+              ${models.map(m => `<option value="${m.id}" ${formData.modelId == m.id ? 'selected' : ''}>${m.name}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBookingForm() {
+      const content = document.getElementById('formContent');
+      if (!content) return;
+      const today = new Date().toISOString().split('T')[0];
+
+      let body = '';
+
+      if (currentStep === 0) {
+        body = `
+          <div class="form-title">${userIcon} بيانات العميل</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>الاسم بالكامل *</label>
+              <input type="text" id="fName" placeholder="مثال: أحمد سمير" value="${formData.name}" oninput="updateField('name', this.value)">
+            </div>
+            <div class="form-group">
+              <label>رقم الموبايل *</label>
+              <input type="tel" id="fPhone" dir="ltr" placeholder="01xxxxxxxxx" value="${formData.phone}" oninput="updateField('phone', this.value)">
+            </div>
+          </div>
+          ${isCarService ? `<div id="vehicleSection"></div>` : ''}
+        `;
+      } else if (currentStep === 1) {
+        body = services.length > 0 ? `
+          <div class="form-title">${wrenchIcon} الخدمة المطلوبة *</div>
+          <div class="svc-grid">
+            ${services.map(s => `
+              <div class="svc-item ${selectedService && selectedService.id === s.id ? 'selected' : ''}" onclick="selectService(${s.id}, this)">
+                <div>
+                  <div class="svc-name">${currentLanguage === 'ar' ? s.name : (s.name_en || s.name)}</div>
+                  ${s.price ? `<div class="svc-meta">${s.price} ج.م</div>` : ''}
+                </div>
+                <span class="svc-radio"></span>
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div class="form-title">${wrenchIcon} الخدمة المطلوبة</div>
+          <p class="empty-note">لا توجد خدمات متاحة حاليًا — اكتب طلبك في الملاحظات وهنتواصل معاك.</p>
+        `;
+      } else if (currentStep === 2) {
+        body = `
+          <div class="form-title">${calendarIcon} الموعد</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>تاريخ الحجز *</label>
+              <input type="date" id="fDate" min="${today}" value="${formData.date}" oninput="updateField('date', this.value)" onclick="this.showPicker ? this.showPicker() : this.focus()">
+            </div>
+            <div class="form-group">
+              <label>وقت الحجز *</label>
+              <input type="time" id="fTime" value="${formData.time}" oninput="updateField('time', this.value)" onclick="this.showPicker ? this.showPicker() : this.focus()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>ملاحظات إضافية</label>
+            <textarea id="fNotes" placeholder="أي طلبات أو تفاصيل خاصة..." oninput="updateField('notes', this.value)">${formData.notes}</textarea>
+          </div>
+          <label class="sms-row">
+            <input type="checkbox" id="fSms" ${formData.sendSms !== false ? 'checked' : ''} onchange="updateField('sendSms', this.checked)">
+            إرسال رسالة تأكيد SMS على الموبايل
+          </label>
+        `;
+      } else {
+        const carTxt = carSummary();
+        body = `
+          <div class="form-title">${checkIcon} مراجعة الحجز</div>
+          <div class="summary-box">
+            <div class="row">${userIcon} ${formData.name}</div>
+            <div class="row">${phoneIcon} ${formData.phone}</div>
+            ${carTxt ? `<div class="row">${carIcon} ${carTxt}</div>` : ''}
+            ${selectedService ? `<div class="row">${wrenchIcon} ${selectedService.name}</div>` : ''}
+            <div class="row">${calendarIcon} ${formData.date} &middot; ${formData.time}</div>
+            ${formData.notes ? `<div class="row">${messageIcon} ${formData.notes}</div>` : ''}
+          </div>
+        `;
+      }
+
+      const nav = `
+        <div class="form-nav">
+          ${currentStep > 0 ? `<button type="button" class="nav-back" onclick="goStep(${currentStep - 1})">السابق</button>` : ''}
+          ${currentStep < 3
+            ? `<button type="button" class="submit-btn" onclick="nextStep()">التالي ${arrowLeftIcon}</button>`
+            : `<button type="button" class="submit-btn" id="submitBtn" onclick="submitBooking()">تأكيد الحجز ${arrowLeftIcon}</button>`}
+        </div>
+      `;
+
+      content.innerHTML = `
+        <div class="steps">
+          <div class="step" id="step1" onclick="goStep(0)"><span class="num">١</span><span>البيانات</span></div>
+          <div class="step-sep"></div>
+          <div class="step" id="step2" onclick="goStep(1)"><span class="num">٢</span><span>الخدمة</span></div>
+          <div class="step-sep"></div>
+          <div class="step" id="step3" onclick="goStep(2)"><span class="num">٣</span><span>الموعد</span></div>
+          <div class="step-sep"></div>
+          <div class="step" id="step4" onclick="goStep(3)"><span class="num">٤</span><span>التأكيد</span></div>
+        </div>
+
+        <div class="panel-head">
+          <h2>احجز موعدك</h2>
+          <p>املأ بيانات العربية واختار الخدمة والموعد.</p>
+        </div>
+
+        ${body}
+        ${nav}
+      `;
+
+      if (currentStep === 0 && isCarService) renderVehicleSection();
+      updateSteps();
+      updateSubmitButton();
+    }
+
+    function goStep(n) {
+      if (n > currentStep) return; // forward only through nextStep() validation
+      currentStep = Math.max(0, n);
+      renderBookingForm();
+      scrollPanelTop();
+    }
+
+    function nextStep() {
+      if (currentStep === 0 && (!formData.name || !formData.phone)) {
+        alert('من فضلك اكتب الاسم ورقم الموبايل');
+        return;
+      }
+      if (currentStep === 1 && services.length > 0 && !selectedService) {
+        alert('من فضلك اختار الخدمة المطلوبة');
+        return;
+      }
+      if (currentStep === 2 && (!formData.date || !formData.time)) {
+        alert('من فضلك اختار تاريخ ووقت الحجز');
+        return;
+      }
+      currentStep = Math.min(3, currentStep + 1);
+      renderBookingForm();
+      scrollPanelTop();
+    }
+
+    function scrollPanelTop() {
+      const panel = document.querySelector('.booking-panel');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Brand picked → load its models and refresh the vehicle section
+    async function handleBrandChange(brandId) {
+      formData.brandId = brandId;
+      formData.modelId = '';
+      models = brandId ? await fetchModels(brandId) : [];
+      renderVehicleSection();
+      updateSubmitButton();
+    }
+
+    function updateSteps() {
+      document.querySelectorAll('.step').forEach((el, i) => {
+        el.classList.toggle('done', i < currentStep);
+        el.classList.toggle('active', i === currentStep);
+      });
+    }
+    
+    function updateField(field, value) {
+      formData[field] = value;
+      updateSubmitButton();
+    }
+
+    function updateSubmitButton() {
+      const btn = document.getElementById('submitBtn');
+      if (!btn) return;
+
+      const hasService = services.length === 0 || !!selectedService;
+      const hasBasicInfo = formData.name && formData.phone && formData.date && formData.time;
+
+      btn.disabled = !(hasService && hasBasicInfo);
+    }
+
+    async function submitBooking() {
+      const btn = document.getElementById('submitBtn');
+
+      // Validate required fields
+      if (services.length > 0 && !selectedService) {
+        alert('من فضلك اختار الخدمة المطلوبة');
+        return;
+      }
+      if (!formData.name || !formData.phone || !formData.date || !formData.time) {
+        alert('من فضلك املأ كل الحقول المطلوبة (الاسم، الموبايل، التاريخ، الوقت)');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div>';
+
+      try {
+        console.log('� Creating booking...');
+        const result = await createBooking();
+        renderSuccess(result);
+      } catch (error) {
+        console.error('❌ Booking error:', error);
+        alert(error.message || 'فشل إنشاء الحجز. حاول مرة أخرى.');
+        btn.disabled = false;
+        btn.innerHTML = `تأكيد الحجز ${arrowLeftIcon}`;
+      }
+    }
+
+    function renderSuccess() {
+      const content = document.getElementById('formContent');
+      const carLabel = carSummary();
+      content.innerHTML = `
+        <div class="success-view">
+          <div class="success-icon">${checkIcon}</div>
+          <h2>تم تأكيد الحجز!</h2>
+          <p>تم استلام طلبك في <strong style="color:#fff">${branchName}</strong>.</p>
+          <div class="summary-box">
+            ${selectedService ? `<div class="row">${wrenchIcon} ${selectedService.name}</div>` : ''}
+            <div class="row">${calendarIcon} ${formData.date} &middot; ${formData.time}</div>
+            <div class="row">${userIcon} ${formData.name}</div>
+            <div class="row">${phoneIcon} ${formData.phone}</div>
+            ${carLabel ? `<div class="row">${carIcon} ${carLabel}</div>` : ''}
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px;">فريقنا هيتواصل معاك قريب لتأكيد الميعاد.</p>
+          <div class="success-actions">
+            <button class="btn-primary" onclick="resetForm()">حجز موعد آخر</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Test API Connection (for debugging)
+    window.testAPI = async function() {
+      console.log('=== Testing API Connection ===');
+      console.log('API_BASE_URL:', API_BASE_URL);
+      console.log('Current API_TOKEN:', API_TOKEN ? API_TOKEN.substring(0, 50) + '...' : 'NO TOKEN');
+      
+      // Test 1: Check if auth endpoint works
+      console.log('\n--- Test 1: Auth Endpoint ---');
+      try {
+        const authResponse = await fetch('/api/auth.php', {method: 'POST'});
+        const authData = await authResponse.json();
+        console.log('Auth response:', authData);
+        
+        if (authData.access_token) {
+          console.log('✅ Auth endpoint works!');
+          console.log('Token preview:', authData.access_token.substring(0, 50) + '...');
+          
+          // Test 2: Try using the token
+          console.log('\n--- Test 2: Using Token ---');
+          const testResponse = await fetch(`${API_BASE_URL}/manual-booking/customers?search=test`, {
+            headers: {
+              'Authorization': `Bearer ${authData.access_token}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          });
+          console.log('Test request status:', testResponse.status);
+          const testData = await testResponse.json();
+          console.log('Test request response:', testData);
+          
+          if (testResponse.ok) {
+            console.log('✅ API Connection Successful!');
+          } else {
+            console.error('❌ API request failed with valid token');
+          }
+        } else {
+          console.error('❌ No token in auth response');
+        }
+      } catch (error) {
+        console.error('❌ API Test Failed:', error);
+      }
+    };
+    
+    window.clearAuth = function() {
+      console.log('Clearing authentication...');
+      API_TOKEN = '';
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('token_expires_at');
+      console.log('✅ Auth cleared. Refresh page to login again.');
+    };
+    
+    console.log('💡 Available commands:');
+    console.log('  - testAPI() : Test the API connection');
+    console.log('  - clearAuth() : Clear stored authentication');
+
+    // Gold particle background (same vibe as legendprotek.com)
+    (function initParticles() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      const COUNT = 90;
+      const parts = [];
+      let mx = 0, my = 0;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < COUNT; i++) {
+        parts.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.4 + 0.3,
+          s: Math.random() * 0.35 + 0.08,
+          dx: (Math.random() - 0.5) * 0.08,
+          o: Math.random() * 0.45 + 0.15,
+        });
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mx = (e.clientX / w - 0.5) * 12;
+        my = (e.clientY / h - 0.5) * 12;
+      }, { passive: true });
+
+      (function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of parts) {
+          p.y -= p.s;
+          p.x += p.dx;
+          if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          ctx.beginPath();
+          ctx.arc(p.x + mx * p.r * 0.4, p.y + my * p.r * 0.4, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(212,175,55,' + p.o + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      })();
+    })();
+  </script>
+</body>
+</html>
